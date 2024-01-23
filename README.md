@@ -12,6 +12,8 @@ This project is a microservice for a hypothetical social media analytics platfor
 - [Cache Configuration](#caching)
 - [Rate Limiting](#rate-limiting)
 - [Running the Application](#running-the-application)
+- [Scalability Considerations](#scalability-considerations)
+- [Infrastructure Considerations](#infrastructure-considerations)
 
 ## Installation
 
@@ -128,6 +130,50 @@ Rate limiting is implemented using the django-ratelimit package. Adjust rate lim
      <img width="644" alt="image" src="https://github.com/abhishekg495/shopflo/assets/35146409/ca6d8e41-712d-422e-8025-2d478f92a449">
 
 
-     
+## Scalability Considerations
 
+1. Handling large amounts of post data and high request volumes
+   - Using a database that scales well with data requirements, preferably horizontal scaling for optimised costs. PostgreSQL and MySQL are two good choices for this purpose.
+   - Caching the queries to avoid unnecessary calls to the large database in case of repeated queries.
+   - Rate limiting to restrict the frequency at which a certain IP is allowed to access the server
+     
+2. Parallelizing the analysis computation
+   - Asynchronous processing to execute multiple queries simultaneously
+   - Bacth processing to process multiple Posts at a time instead of a single post.
+
+## Infrastructure Considerations
+
+1. Database
+Django provides a batteries-included approach with built in modules to interface with many popular databases like SQLite, PostgreSQL,  MySQL etc. Since the key consideration of the project is scalability, we opt for a database that has good community support and is able to scale well horizontally. MongoDB and Cassandra offer easy horizontal scaling, whereas PostgreSQL and MySQL are more robust but may require more careful planning for horizontal scaling.
+
+2. Traffic Spikes
+  - Load testing each update to the service before deploying it to production.
+  - Using load balancers in production to avoid bottlenecking
+  - Techniques like caching, async processing and rate limiting.
+  - Content compression
+
+3. Availability and Fault Tolerance of the Service
+   - Distributed architecture
+   - Redundant storage of critical data
+   - Database replication
+   - Service redundancy
+     
+4. Security of the Data
+   - Authentication and authorization (role based access)
+   - Data encryption in transport layer
+   - Input validation and sanity checks
+   - Rate limiting to prevent DOS attacks
+   - Regular data backups
+     
+5. Logging, Monitoring and Alerting
+   - Multi-level logging approach with contextual information
+   - Monitoring system metrics, applications metrics, health checks etc.
+   - System and service availability monitoring
+   - Threshold based alert triggers
+   - Anomaly detection alerts
+   - Severity levels for alerts (Caution, Warning, Critical etc)
+
+6. Hosting Providers and Services
+   - Microsoft Azure and Amazon Web Services are considerable choices, due to their wide community support and thorough documentation.
+   - I, personally, would opt for Microsoft Azure given the scalability provided by blob storage, availability of both SQL and NoSQL databases and intuitive logging and monitoring interfaces for system performance.
   
