@@ -12,9 +12,6 @@ This project is a microservice for a hypothetical social media analytics platfor
 - [Cache Configuration](#caching)
 - [Rate Limiting](#rate-limiting)
 - [Running the Application](#running-the-application)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Installation
 
