@@ -21,7 +21,6 @@ This project is a microservice for a hypothetical social media analytics platfor
 
    ```bash
    git clone https://github.com/yourusername/social-media-analytics.git
-   cd social-media-analytics
    ```
 
 2. Install the requirements
