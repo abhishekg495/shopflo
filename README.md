@@ -91,3 +91,13 @@ The project utilizes Django's caching framework. Adjust caching settings in sett
   # function to cache
   ```
   
+## Rate Limiting
+Rate limiting is implemented using the django-ratelimit package. Adjust rate limits in views using the @ratelimit decorator.
+
+  ```bash
+  # views.py
+
+  @ratelimit(key='ip', rate='1/s', block=True)
+  # function/endpoint to ratelimit
+  ```
+  
