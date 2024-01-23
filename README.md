@@ -53,7 +53,7 @@ This project is a microservice for a hypothetical social media analytics platfor
 ## Database Configuration
 Configure your database settings in settings.py. The project currently uses MySQL for local development. The same may be used for production due to its robustness and scalibility.
 
-  ```bash
+  ```python
   # settings.py
   # modify these settings according to your database
   DATABASES = {
@@ -74,7 +74,7 @@ Configure your database settings in settings.py. The project currently uses MySQ
 ## Cache Configuration
 The project utilizes Django's caching framework. Adjust caching settings in settings.py and use the @cache_page decorator in views.
 
-  ```bash
+  ```python
   # settings.py
   CACHES = {
       'default': {
@@ -84,20 +84,53 @@ The project utilizes Django's caching framework. Adjust caching settings in sett
   }
   ```
 
-  ```bash
+  ```python
   # views.py
 
   @cache_page(60 * 15)  # Cache for 15 minutes (adjust as needed)
-  # function to cache
+  # function/endpoint to cache 
   ```
   
 ## Rate Limiting
 Rate limiting is implemented using the django-ratelimit package. Adjust rate limits in views using the @ratelimit decorator.
 
-  ```bash
+  ```python
   # views.py
 
   @ratelimit(key='ip', rate='1/s', block=True)
   # function/endpoint to ratelimit
   ```
+
+## Running the Application
+
+1. Run migrations
+   ```bash
+   python manage.py migrate
+   ```
+   
+2. Start the development server
+   ```bash
+   python manage.py runserver
+   ```
+
+3. Use the IP address http://localhost:8000 to access the API.
+
+   Examples:
+   
+   - Using curl
+     ```bash
+     curl -X POST -H "Content-Type: application/json" -d '{"id": "123", "content": "This is a sample post."}' http://localhost:8000/api/v1/posts/
+     ```
+     ```bash
+     curl http://localhost:8000/api/v1/posts/123/analysis/
+     ```
+
+   - Using Postman
+     
+     <img width="646" alt="image" src="https://github.com/abhishekg495/shopflo/assets/35146409/7b375e43-7236-40c5-9a8d-9789fd2c99d9">
+     <img width="644" alt="image" src="https://github.com/abhishekg495/shopflo/assets/35146409/ca6d8e41-712d-422e-8025-2d478f92a449">
+
+
+     
+
   
